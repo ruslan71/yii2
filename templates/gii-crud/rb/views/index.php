@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= "<?= " ?>$this->render('_grid', [
         'model' => $model,
         'dataProvider' => $dataProvider,
-        <?= !empty($generator->searchModelClass) ? "'filterModel' => \$searchModel,\n" : ''; ?>
+        <?= !empty($generator->searchModelClass) ? "'searchModel' => \$searchModel,\n" : ''; ?>
     ]) ?>
 
 </div>

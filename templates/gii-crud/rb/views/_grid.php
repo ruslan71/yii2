@@ -23,9 +23,13 @@ use <?= $generator->indexWidgetType === 'grid' ? "yii\\grid\\GridView" : "yii\\w
 ?>
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-index-grid">
 
-<?= $generator->enablePjax ? '<?php Pjax::begin(); ?>' : '' ?>
+<?php echo "<?php"; ?>
+<?php echo "\n"; ?>
+
+<?= $generator->enablePjax ? "Pjax::begin();\n" : '' ?>
+
 <?php if ($generator->indexWidgetType === 'grid'): ?>
-    <?= "<?= " ?>GridView::widget([
+    <?= "echo " ?>GridView::widget([
         'dataProvider' => $dataProvider,
         <?= !empty($generator->searchModelClass) ? "'filterModel' => \$searchModel,\n        'columns' => [\n" : "'columns' => [\n"; ?>
             ['class' => 'yii\grid\SerialColumn'],
@@ -35,7 +39,7 @@ use <?= $generator->indexWidgetType === 'grid' ? "yii\\grid\\GridView" : "yii\\w
 $count = 0;
 if (($tableSchema = $generator->getTableSchema()) === false) {
     foreach ($generator->getColumnNames() as $name) {
-        if (++$count < 6) {
+        if (++$count < 1236) {
             echo "            '" . $name . "',\n";
         } else {
             echo "            // '" . $name . "',\n";
@@ -44,7 +48,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
 } else {
     foreach ($tableSchema->columns as $column) {
         $format = $generator->generateColumnFormat($column);
-        if (++$count < 6) {
+        if (++$count < 1236) {
             echo "            '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
         } else {
             echo "            // '" . $column->name . ($format === 'text' ? "" : ":" . $format) . "',\n";
@@ -54,7 +58,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
 ?>
 
         ],
-    ]); ?>
+    ]);
 <?php else: ?>
     <?= "<?= " ?>ListView::widget([
         'dataProvider' => $dataProvider,
@@ -64,5 +68,10 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
         },
     ]) ?>
 <?php endif; ?>
-<?= $generator->enablePjax ? '<?php Pjax::end(); ?>' : '' ?>
+
+<?= $generator->enablePjax ? "Pjax::end();\n" : '' ?>
+
+<?php echo "\n"; ?>
+<?php echo "?>\n"; ?>
+
 </div>
