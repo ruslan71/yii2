@@ -13,8 +13,6 @@ echo "<?php\n";
 ?>
 
 use yii\helpers\Html;
-use <?= $generator->indexWidgetType === 'grid' ? "yii\\grid\\GridView" : "yii\\widgets\\ListView" ?>;
-<?= $generator->enablePjax ? 'use yii\widgets\Pjax;' : '' ?>
 
 /* @var $this yii\web\View */
 <?= !empty($generator->searchModelClass) ? "/* @var \$searchModel " . ltrim($generator->searchModelClass, '\\') . " */\n" : '' ?>
@@ -35,7 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?= "<?= " ?>$this->render('_grid', [
-        'model' => $model,
         'dataProvider' => $dataProvider,
         <?= !empty($generator->searchModelClass) ? "'searchModel' => \$searchModel,\n" : ''; ?>
     ]) ?>

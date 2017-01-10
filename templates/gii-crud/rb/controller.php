@@ -92,8 +92,9 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      */
     public function actionView(<?= $actionParams ?>)
     {
+        $model = $this->findModel(<?= $actionParams ?>);
         return $this->render('view', [
-            'model' => $this->findModel(<?= $actionParams ?>),
+            'model' => $model,
         ]);
     }
 
@@ -170,7 +171,7 @@ if (count($pks) === 1) {
         if (($model = <?= $modelClass ?>::findOne(<?= $condition ?>)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(<?= $generator->generateString('The requested page does not exist.') ?> );
+            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
         }
     }
 }

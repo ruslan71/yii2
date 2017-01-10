@@ -33,7 +33,10 @@ use yii\widgets\ActiveForm;
             ],        
         ]
     
-    ); ?>
+    ); 
+
+        echo $form->errorSummary($model);
+    ?>
 
 <?php foreach ($generator->getColumnNames() as $attribute) {
     if (in_array($attribute, $safeAttributes)) {
